@@ -4,10 +4,10 @@ const router=require('express').Router()
 
 //cuando salte el metodo get, segun la ruta, mostrara algo
 router.get('/',(req,res)=>{
-    res.send('index page')
+    res.render('index')//renderiza .hbs segun configuracion
 })
 router.get('/about',(req,res)=>{
-    res.send('about page')
+    res.render('about')
 })
 
 module.exports=router

@@ -4,9 +4,9 @@ const router=require('express').Router()
 
 //cuando salte el metodo get, segun ruta, mostrara algo
 router.get('/users/signin',(req,res)=>{
-    res.send('Login page')
+    res.render('users/signin')
 })
 router.get('/users/signup',(req,res)=>{
-    res.send('Register page')
+    res.render('users/signup')
 })
 module.exports=router
