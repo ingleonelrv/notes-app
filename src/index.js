@@ -5,6 +5,7 @@ const exphbs=require('express-handlebars')
 const methodOverride=require('method-override')
 const session=require('express-session')
 const flash=require('connect-flash')
+const passport=require('passport')
 
 
 //##########Initializations##########
@@ -12,6 +13,8 @@ const flash=require('connect-flash')
 const app = express()
 //inicializo mi base de datos
 require('./database')
+//importo el archivo config/passport.js
+require('./config/passport.js')
 
 
 //##########Settings##########
@@ -42,13 +45,18 @@ app.use(session({
     resave:true,
     saveUninitialized:true
 }))
+//debe ir despues de session
+app.use(passport.initialize())
+//le digo a passport q use session de express
+app.use(passport.session())
+//flash va al final xq el login va primero
 app.use(flash())
-
 
 //##########Gloval variables##########
 app.use((req,res,next)=>{
     res.locals.success_msg=req.flash('success_msg')
     res.locals.error_msg=req.flash('error_msg')
+    res.locals.error=req.flash('error')
     next()
 })
 

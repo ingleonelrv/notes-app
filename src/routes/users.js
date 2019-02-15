@@ -3,6 +3,8 @@
 const router=require('express').Router()
 //instancio el modelo User para crear nuevo User
 const User =require('../models/Users')
+//importo el modulo passport para la AUTENTICACION
+const passport=require('passport')
 
 //cuando salte el metodo get, segun ruta, mostrara algo
 router.get('/users/signin',(req,res)=>{
@@ -11,6 +13,12 @@ router.get('/users/signin',(req,res)=>{
 router.get('/users/signup',(req,res)=>{
     res.render('users/signup')
 })
+//para AUTENTICAR usare passport, local se da por new LocalStrategy
+router.post('/users/signin',passport.authenticate('local',{
+    successRedirect:'/notes',
+    failureRedirect:'/users/signin',
+    failureFlash:true//poder enviar mensajes
+}))
 //cuando de click en Register traera aca, se llama igual al GET pero como este es POST no problem
 router.post('/users/signup',async (req,res)=>{
     //desestructuro los datos q me llegan en request
