@@ -10,8 +10,8 @@ const {isAuthenticated}= require('../helpers/auth')
 //cuando salte el metodo GET, segun ruta, devolvera algo
 //listare todas las notas en la bd, es asincrona
 router.get('/notes',isAuthenticated,async (req,res)=>{
-    //uso el schema para hacer la consulta
-    const notes=await Note.find().sort({date:'desc'})
+    //uso el schema para hacer la consulta, pasando el user.id guardado ahi x passport al autenticar
+    const notes=await Note.find({user:req.user.id}).sort({date:'desc'})
     //renderizare la vista y le paso el objeto de datos
     res.render('notes/all-notes',{notes})
 })
@@ -41,8 +41,10 @@ router.post('/notes/new-note',isAuthenticated,async (req,res)=>{
     }else{
         //instancio el schema(clase) y crea un nuevo dato para ALMACENAR en la BD
         const newNote=new Note({title,description})
+        //le agrego a la nota el user.id q fue guardado por passport en req
+        newNote.user=req.user.id;
         //ahora ALMACENO ese nuevo dato en la BD pero de forma asincrona
-        await newNote.save()
+        await newNote.save();
         //Para usar flash() y pasar mensajes
         req.flash('success_msg','Note added Successfully')
         //cuando termine me redireccionara a otra vista donde se listan las notas

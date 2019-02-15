@@ -6,7 +6,8 @@ const {Schema} = mongoose
 const NoteSchema=new Schema({
     title:{type:String, required:true},
     description:{type:String, required:true},
-    date:{type:Date, default:Date.now}
+    date:{type:Date, default:Date.now},
+    user:{type:String}
 })
 //uso un metodo de model para exportar un nombre y mi schema
 module.exports=mongoose.model('Note',NoteSchema)

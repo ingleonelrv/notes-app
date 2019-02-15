@@ -6,7 +6,7 @@ const UserSchema=new Schema({
     name:{type:String, required:true},
     email:{type:String, required:true},
     password:{type:String, required:true},
-    date:{type:Date, default:Date.now}
+    date:{type:Date, default:Date.now},
 })
 //creo metodo para encriptar datos usando el modulo bcrypt
 UserSchema.methods.encryptPassword=async (password)=>{
