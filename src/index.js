@@ -57,6 +57,8 @@ app.use((req,res,next)=>{
     res.locals.success_msg=req.flash('success_msg')
     res.locals.error_msg=req.flash('error_msg')
     res.locals.error=req.flash('error')
+    //cuando se autentica passport guarda el usuario en un objeto de request
+    res.locals.user=req.user || null
     next()
 })
 

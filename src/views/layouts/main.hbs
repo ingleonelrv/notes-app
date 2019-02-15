@@ -11,8 +11,8 @@
     <title>Notes App</title>
 </head>
 <body>
-    <p>Navigation</p>
-    <main class="container">
+    {{>navigation}}
+    <main class="container p-4">
         {{!-- sintaxis de handlebars q indica q eso es lo unico q cambiara --}}
         {{>messages}}
         {{>errors}}

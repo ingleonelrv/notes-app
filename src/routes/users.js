@@ -56,4 +56,9 @@ router.post('/users/signup',async (req,res)=>{
         res.redirect('/users/signin')
     }
 })
+router.get('/users/logout',(req,res)=>{
+    //logout() es un metodo de passport
+    req.logout()
+    res.redirect('/')
+})
 module.exports=router
